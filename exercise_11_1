@@ -1,0 +1,11 @@
+I chose Java as the language for this hypothethical application.
+
+1.  The most used linter for Java is checkstyle which can be used to impose and check that code meets the given practises. It can be run from command line (so its probably usable in CI environment) and it can be integrated into typical Java IDEs like IntelliJ IDEA.
+
+JUnit seems to be a good choice for making unit tests for Java project and can be ran in CI environment. However, there is probably also need for some integration or end-to-end testing, and for that we need separate tool. If the our project is full stack web application, we can probably use something like selenium or even playwright (should not matter which language is used for backend).Playwright tests can be set to run automatically with GitHub Actions.
+
+For build phase, I would use either Maven or Gradle which are similiar to npm.
+
+2.  Alternatives for GitHub Actions are provided by other repository hosting services including Gitlab CI/CD or Bitbucket Pipelines. For alternative self-hosted services (beside Jenkins) are TeamCity and CircleCI (though Gitlab CI/CD can also be self-hosted).
+
+3.  The project size is a big factor. For small and medium projects cloud-hosted is probably better since there many things are already taken care of. For larger projects there might be more need for special configurations and customization, and then self-hosted might be better since tools like Jenkins offer great customization options.
