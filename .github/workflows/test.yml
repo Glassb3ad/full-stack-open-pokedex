@@ -26,3 +26,7 @@ jobs:
         env:
           JOINED_MESSAGES: ${{ join(toJson(github.event.commits.*.message)) }}
         run: echo "$JOINED_MESSAGES"
+      - name: joined messages include \#skip
+        env:
+          HAS_SKIP: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        run: echo "$HAS_SKIP"
