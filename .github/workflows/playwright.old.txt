@@ -1,3 +1,4 @@
+Moved playwright testing to pipeline.yml
 name: Playwright Tests
 on:
   push:
