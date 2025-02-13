@@ -33,14 +33,6 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - name: Succesfull deployment notification
-        if: ${{ success() && github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: info
-          details: Deployed
-          description: Test, build and deployment succeeded.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Notify that build failed
         uses: sarisia/actions-status-discord@v1
@@ -61,3 +53,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: minor
+      - name: Succesfull deployment notification
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          nodetail: true
+          title: 'New version deployed!'
+          description: |
+            Version `${{ github.event.release.tag_name }}`
+          color: 00ff08
