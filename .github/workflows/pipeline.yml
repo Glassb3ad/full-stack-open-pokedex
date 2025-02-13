@@ -41,13 +41,15 @@ jobs:
           details: Deployed
           description: Test, build and deployment succeeded.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
       - name: Notify that build failed
+        uses: sarisia/actions-status-discord@v1
         if: failure()
-        uses: rjstone/discord-webhook-notify@v1.0.0
         with:
-          severity: error
-          details: Build Failed!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: 'Failed'
+          description: 'Failed to build application'
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
