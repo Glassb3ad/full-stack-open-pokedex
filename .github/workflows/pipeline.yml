@@ -62,4 +62,4 @@ jobs:
           title: 'New version deployed!'
           description: |
             Version `${{ github.event.release.tag_name }}`
-          color: 00ff08
+          color: 0x00ff08
